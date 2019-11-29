@@ -1,0 +1,33 @@
+public class Display {
+
+	private int value = 0 ;
+	private int limit = 0 ;
+	
+	public Display(int limit) {
+		this.limit = limit ;
+	}
+	public void Increase() {
+		
+		value ++ ;
+		if(value == limit) {
+			value = 0 ;
+		}
+		
+	}
+	public int Getvalue() {
+		return value;
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Display hour = new Display(24);
+		Display minute = new Display(60);
+		while(true) {
+			minute.Increase();
+			if(minute.Getvalue() == 0) {
+				hour.Increase();
+			}
+			System.out.printf("%02d:%02d\n",hour.Getvalue(),minute.Getvalue());
+		}
+	}
+}
