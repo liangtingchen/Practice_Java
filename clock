@@ -1,33 +1,83 @@
-public class Display {
+public class Main {
+	public static void main(String[] args) {
+
+		java.util.Scanner in = new java.util.Scanner(System.in);
+
+		Clock clock = new Clock(in.nextInt(), in.nextInt(), in.nextInt());
+
+		clock.tick();
+
+		System.out.println(clock);
+
+		in.close();
+	}
+}
+class Clock {
+	private	Display hour = new Display(24);
+	private	Display minute = new Display(60);
+	private Display second = new Display(60);	
+		
+	public Clock(int hour, int minute, int second)
+	{
+		this.hour.initialize(hour);
+		this.minute.initialize(minute);
+		this.second.initialize(second);
+	}
+	public void tick() {
+		
+		this.second.Increase();
+		if(second.Getvalue()==0) 
+		{
+			minute.Increase();
+			if(minute.Getvalue()==0) 
+			{
+				hour.Increase();
+			}
+		}
+	}
+	public String format(int x) {
+		String time = new String();
+		if(x<10) {
+			time = ""+"0"+x;
+		}else {
+			time = ""+x;
+		}
+		return time;
+	}
+	public String toString() {
+		String hh = format(hour.Getvalue());
+		String mm = format(minute.Getvalue());
+		String ss = format(second.Getvalue());
+		String time0 = new String();
+		time0 = hh +":"+ mm +":"+ ss;
+
+		 return time0;
+	}
+}
+class Display {
 
 	private int value = 0 ;
 	private int limit = 0 ;
 	
-	public Display(int limit) {
+	public Display(int limit) 
+	{
 		this.limit = limit ;
 	}
-	public void Increase() {
-		
-		value ++ ;
-		if(value == limit) {
-			value = 0 ;
-		}
+	public  void initialize(int value) {
+		this.value = value;
 		
 	}
+	public void Increase() 
+	{
+		value ++ ;
+		if(value == limit) 
+		{
+			value = 0 ;
+		}
+	}
+
 	public int Getvalue() {
 		return value;
 	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Display hour = new Display(24);
-		Display minute = new Display(60);
-		while(true) {
-			minute.Increase();
-			if(minute.Getvalue() == 0) {
-				hour.Increase();
-			}
-			System.out.printf("%02d:%02d\n",hour.Getvalue(),minute.Getvalue());
-		}
-	}
+
 }
