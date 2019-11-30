@@ -35,6 +35,7 @@ class Clock {
 			}
 		}
 	}
+	
 	public String format(int x) {
 		String time = new String();
 		if(x<10) {
@@ -44,6 +45,7 @@ class Clock {
 		}
 		return time;
 	}
+	//   format() 和 toString()  函数 其实可以写成 String s = String.format("%02d%02d%02d",minute.Getvalue(),hour.Getvalue(),second.Getvalue())
 	public String toString() {
 		String hh = format(hour.Getvalue());
 		String mm = format(minute.Getvalue());
