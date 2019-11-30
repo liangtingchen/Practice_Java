@@ -1,0 +1,56 @@
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		 Scanner in = new Scanner(System.in);
+		 int n = 0;
+		 String read= new String() ;
+		 ArrayList<String> citys =new ArrayList<String>();
+
+		 //读入城市
+		while(!read.equals("###")) 
+		 {
+			 read = in.next();
+			 if(!read.equals("###")) {
+				 citys.add(read);
+				 n++;
+			 }
+			
+		 }
+  //读入里程矩阵
+		int [][] distance = new int[n][n];
+
+		for(int i=0; i<distance.length; i++) {
+			 for(int j=0; j<distance[i].length; j++) {
+				 
+				 distance[i][j] = in.nextInt();
+			 }
+			 
+		 }
+		 
+		 //建立HashMap 城市与里程间的对应关系，按输入顺序给城市编号（0，1，2...),两个城市的编号(如00,01,12,...)和他们间的距离一一对应
+		 HashMap<String, Integer> distanceTable =new HashMap<String,Integer>();
+		 for(int i= 0; i<n;i++)
+		 {
+			 for(int j =0 ; j<n;j++) {
+				 
+				 
+				 
+				 distanceTable.put(""+i+j, distance[i][j]);
+			 }
+			 
+		 }
+		 String city1 = in.next();
+		 String city2 = in.next();
+		 int i = citys.indexOf(city1);
+		 int j = citys.indexOf(city2);
+		 int mileage = distanceTable.get(""+i+j);
+		 System.out.println(mileage);
+		 
+		 in.close();
+	}
+}
