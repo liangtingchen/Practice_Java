@@ -1,0 +1,84 @@
+import java.util.Scanner;
+
+
+public class Main {
+
+
+
+	public static void main(String[] args) {
+
+		Scanner in = new Scanner(System.in);
+
+		Fraction a = new Fraction(in.nextInt(), in.nextInt());
+
+		Fraction b = new Fraction(in.nextInt(),in.nextInt());
+
+		a.print();
+
+		b.print();
+
+		a.plus(b).print();
+
+		a.multiply(b).plus(new Fraction(5,6)).print();
+
+		a.print();
+
+		b.print();
+
+		in.close();
+	}
+}
+class Fraction{
+	int numerator=0;
+	int donominator=1;
+	Fraction(int a ,int b){
+		numerator = a;
+		donominator = b;
+	}
+	Double toDouble() 
+	{
+		double x=(double)(numerator)/donominator;
+		return x;
+	}
+	
+	Fraction plus(Fraction r) 
+	{
+		int p1 = this.numerator;
+		int p2 = this.donominator;
+		p1 = p1*r.donominator+p2*r.numerator;
+		p2 = p2*r.donominator;
+		Fraction plus =new Fraction(p1,p2);
+		return plus;
+	}
+	Fraction multiply(Fraction r) 
+	{
+		int m1 = this.numerator;
+		int m2 = this.donominator;
+		m1 *= r.numerator;
+		m2 *= r.donominator;
+		
+		Fraction multiply = new Fraction(m1,m2);
+		return multiply;
+	}
+	void print() 
+	{	
+		if(numerator%donominator == 0) {
+			numerator /= donominator;
+			donominator =1;
+			System.out.println(numerator);
+		}
+		else 
+		{
+			int min=numerator<donominator?numerator:donominator;
+			for(int i=min ; i>1; i--) 
+			{
+				if(numerator%i==0 && donominator%i ==0) {
+					numerator /= i;
+					donominator /= i;
+					break;
+				}
+			}
+			System.out.println(numerator+"/"+donominator);
+		}
+	}
+}
